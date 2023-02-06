@@ -103,6 +103,7 @@ public class Window extends JFrame implements ActionListener {
             filePath = fp.select(filePath);
             if (filePath != null) {
                 showFilePath.setText(filePath);
+                //刷新配置文件
                 Config config = new Config();
                 config.setFilePath(filePath);
             }
@@ -112,6 +113,7 @@ public class Window extends JFrame implements ActionListener {
             dictionaryPath = dp.select(dictionaryPath);
             if (dictionaryPath != null) {
                 showDictionaryPath.setText(dictionaryPath);
+                //刷新配置文件
                 Config config = new Config();
                 config.setDictionaryPath(dictionaryPath);
             }
@@ -120,8 +122,10 @@ public class Window extends JFrame implements ActionListener {
             Translate translate = new Translate();
             filePath = showFilePath.getText();
             dictionaryPath = showDictionaryPath.getText();
-            translate.readDictionary(dictionaryPath);
-            translate.startTranslate(filePath);
+            translate.startTranslate(dictionaryPath, filePath);
+            ////刷新配置文件
+            Config config = new Config();
+            config.setFilePath(filePath);
         }
     }
 }

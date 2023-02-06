@@ -3,37 +3,21 @@ import java.io.*;
 import java.util.HashMap;
 
 public class Config {
-    String filePath,
+    String filePath = "c:",
             dictionaryPath = ".\\config\\dictionary.txt",
             configPath = ".\\config\\config.txt",
             separator = "=";
     HashMap<String, String> config;
 
     public Config() {
-        //配置文件初始化
-        configInit();
         //读取配置文件
         readConfig();
     }
 
     public void configInit() {
-        File config = new File(configPath);
-        //配置文件不存在
-        if (!config.exists()) {
-            System.out.println("!config.exists()");
-            try {
-                //创建配置文件
-                config.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            //
-            FileWrite filewrite = new FileWrite();
-            //配置文件初始内容
-            String configInit = "filePath=c:\n" + "dictionaryPath=.\\config\\config.txt\n";
-            //初始内容写入配置文件
-            filewrite.write(configInit, configPath);
-        }
+        config.put("filePath","c:");
+        config.put("dictionaryPath", ".\\config\\translationDictionary.txt");
+        refreshConfiguration();
     }
 
     public int readConfig() {
@@ -41,35 +25,50 @@ public class Config {
         String line = "";
         FileReader fr;
         BufferedReader br;
+        File configFile = new File(configPath);
+        //配置文件不存在
+        if (!configFile.exists()) {
+            configInit();
+            return 0;
+        }
+        //读取一行的内容并储存到line变量
         try {
             fr = new FileReader(configPath);
             br = new BufferedReader(fr);
-
-            //读取一行的内容并储存到line变量
             line = br.readLine();
-
         } catch (IOException e) {
-            return 1;
+            throw new RuntimeException(e);
         }
+        //配置文件为空
+        if (line == null) {
+            configInit();
+        }
+        //分割字符串line并储存到temp数组
+        boolean fp=false, dp=false;
         while (line != null) {
             String[] temp;
-
-            // 分割字符串并储存到temp数组
             temp = line.split(separator);
-            if (!temp[0].equals("filePath") && !temp[0].equals("dictionaryPath")) {
-                JOptionPane.showMessageDialog(null, "配置文件错误！请选择正确的配置文件。");
-                return 1;
+            //判断配置文件的内容正确与否
+            if (temp.length != 2) {
+                break;
             }
-            //将读取到的内容放入键值对
-            config.put(temp[0], temp[1]);
-
+            if (temp[0].equals("filePath")) {
+                fp=true;
+            }
+            if (temp[0].equals("dictionaryPath")) {
+                dp=true;
+            }
             try {
-                //读取下一行的内容
                 line = br.readLine();
-
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+            //将读取到的内容放入键值对
+            config.put(temp[0], temp[1]);
+        }
+        if (!(fp && dp)) {
+            configInit();
+            readConfig();
         }
         return 0;
     }
@@ -87,6 +86,7 @@ public class Config {
     public String getConfigPath() {
         return configPath;
     }
+
     public void setFilePath(String filePath) {
         config.put("filePath", filePath);
         refreshConfiguration();

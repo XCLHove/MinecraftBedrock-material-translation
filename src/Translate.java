@@ -22,15 +22,23 @@ public class Translate {
         try {
             fr = new FileReader(dictionaryPath);
             br = new BufferedReader(fr);
-
             //读取一行的内容并储存到line变量
             line = br.readLine();
-
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "未找到翻译所需的字典！");
         } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         while (line != null) {
+            line.indexOf(":", 1);
+            if (line.indexOf(":", 1) == -1) {
+                try {
+                    //读取下一行的内容
+                    line = br.readLine();
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                continue;
+            }
             String[] temp;
 
             // 用“:”分割字符串并储存到temp数组
@@ -44,12 +52,16 @@ public class Translate {
                 line = br.readLine();
 
             } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }
 
     //开始翻译
-    public void startTranslate(String filePath) {
+    public void startTranslate(String dictionaryPath, String filePath) {
+        //读取字典文件
+        readDictionary(dictionaryPath);
+        //
         HashMap<String, Integer> translation = new HashMap<>();
         String line = null;
         FileReader fr;
@@ -77,7 +89,10 @@ public class Translate {
             }
 
             //翻译并存入name变量
-            String name = dictionary.get(temp[0]);
+            String name = temp[0];
+            if (dictionary.get(temp[0]) != null) {
+                name = dictionary.get(temp[0]);
+            }
 
             //count变量储存数量
             int count = Integer.parseInt(temp[1].substring(1));
@@ -96,7 +111,6 @@ public class Translate {
             } catch (IOException e) {
             }
         }
-//        System.out.println(translation);
         String translationAll = "";
         //读取translation的内容并存入字符串变量translationAll
         for (String name : translation.keySet()) {
