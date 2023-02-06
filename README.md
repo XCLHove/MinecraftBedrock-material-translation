@@ -1,4 +1,4 @@
-# McbeTranslate
+# mcbe-projection-material-translation
 
 # 我的世界基岩版投影材料翻译工具
 
