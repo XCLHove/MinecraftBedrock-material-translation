@@ -8,7 +8,9 @@
 
 ---
 
-如有 未翻译/翻译错误 的请自行修改 *config* 文件夹下 *translationDictionary.txt* 的内容并前往[github](https://github.com/XCLHove/McbeTranslate)提[issue](https://github.com/XCLHove/McbeTranslate/issues)写明你添加或修改的内容以帮助完善翻译。
+如有 *翻译错误*  的请自行修改 *config* 文件夹下 *translationDictionary.txt* 的内容并提交[issue](https://github.com/XCLHove/McbeTranslate/issues)写明你修改的内容以帮助完善翻译。
+
+如有 *未翻译* 的请将 *config* 文件夹下 *notInDictinary.txt* 中的内容提交[issue](https://github.com/XCLHove/McbeTranslate/issues)。
 
 translationDictionary.txt 中的格式为:
 
