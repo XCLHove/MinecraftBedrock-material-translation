@@ -1,2 +1,1 @@
 filePath=E:\甘蔗机- block list.txt
-dictionaryPath=.\config\translationDictionary.txt

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exe4j version="9.0" transformSequenceNumber="3">
+  <directoryPresets config="E:/code/java/material-translation/out/artifacts/material_translation_jar" />
+  <application name="material-translation1.1" distributionSourceDir="E:/code/java/material-translation" />
+  <executable name="material-translation1.1" wrapperType="embed" executableMode="gui" />
+  <java mainClass="Main" minVersion="1.8" maxVersion="17">
+    <classPath>
+      <archive location="E:/code/java/material-translation/out/artifacts/material_translation_jar/material-translation.jar" failOnError="false" />
+    </classPath>
+  </java>
+</exe4j>

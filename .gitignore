@@ -1,2 +1,5 @@
 # 项目排除路径
 /out/
+/exeOut/
+/material-translation.exe4j
+/material-translation1.1.exe

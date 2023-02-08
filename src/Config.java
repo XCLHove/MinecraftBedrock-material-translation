@@ -3,10 +3,9 @@ import java.io.*;
 import java.util.HashMap;
 
 public class Config {
-    String filePath = "c:",
-            dictionaryPath = ".\\config\\dictionary.txt",
-            configPath = ".\\config\\config.txt",
-            separator = "=";
+    String filePath = "c:";
+    String configPath = ".\\config\\config.txt";
+    String separator = "=";
     HashMap<String, String> config;
 
     public Config() {
@@ -15,12 +14,13 @@ public class Config {
     }
 
     public void configInit() {
+        //System.out.println("configInit");
         config.put("filePath","c:");
-        config.put("dictionaryPath", ".\\config\\translationDictionary.txt");
         refreshConfiguration();
     }
 
     public int readConfig() {
+        //System.out.println("Config.readConfig");
         config = new HashMap<>();
         String line = "";
         FileReader fr;
@@ -55,9 +55,6 @@ public class Config {
             if (temp[0].equals("filePath")) {
                 fp=true;
             }
-            if (temp[0].equals("dictionaryPath")) {
-                dp=true;
-            }
             try {
                 line = br.readLine();
             } catch (IOException e) {
@@ -66,38 +63,27 @@ public class Config {
             //将读取到的内容放入键值对
             config.put(temp[0], temp[1]);
         }
-        if (!(fp && dp)) {
+        if (!fp) {
             configInit();
             readConfig();
         }
         return 0;
     }
 
-    public String getFilePath() {
-        filePath = config.get("filePath");
-        return filePath;
-    }
-
-    public String getDictionaryPath() {
-        dictionaryPath = config.get("dictionaryPath");
-        return dictionaryPath;
-    }
-
-    public String getConfigPath() {
-        return configPath;
-    }
-
     public void setFilePath(String filePath) {
+        //System.out.println("setFilePath");
         config.put("filePath", filePath);
         refreshConfiguration();
     }
 
-    public void setDictionaryPath(String dictionaryPath) {
-        config.put("dictionaryPath", dictionaryPath);
-        refreshConfiguration();
+    public String getFilePath() {
+        //System.out.println("Config.getFilePath");
+        filePath = config.get("filePath");
+        return filePath;
     }
 
     public void refreshConfiguration() {
+        //System.out.println("Config.refreshConfiguration");
         String writeAll = "";
         for (String pathName : config.keySet()) {
             String path = config.get(pathName);

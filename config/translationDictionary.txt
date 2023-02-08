@@ -27,6 +27,7 @@ lever:拉杆
 air:空气
 structure_block:结构方块
 quartz_stairs:石英楼梯
+prismarine:海晶石砖
 sea_lantern:海晶灯
 barrel:木桶
 stone_button:石质按钮
@@ -58,7 +59,6 @@ wooden_button:木制按钮
 cake:蛋糕
 detector_rail:侦测铁轨
 brewing_stand:酿造台
-prismarine:海晶石砖
 undyed_shulker_box:潜影盒
 slime:黏液块
 bell:钟

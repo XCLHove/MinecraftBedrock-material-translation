@@ -4,80 +4,45 @@ import java.util.HashMap;
 
 public class Translate {
     //储存翻译字典
-    HashMap<String, String> dictionary;
-
+    HashMap<String, String> dictionaryHashMap;
     //分隔符
-    final String separator = ":";
+    String SEPARATOR = ":";
+    Dictionary dictionary;
 
     //构造方法
     public Translate() {
+        dictionary = new  Dictionary();
     }
 
     //读取翻译字典
-    public void readDictionary(String dictionaryPath) {
-        dictionary = new HashMap<>();
-        String line = null;
-        FileReader fr;
-        BufferedReader br = null;
-        try {
-            fr = new FileReader(dictionaryPath);
-            br = new BufferedReader(fr);
-            //读取一行的内容并储存到line变量
-            line = br.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        while (line != null) {
-            line.indexOf(":", 1);
-            if (line.indexOf(":", 1) == -1) {
-                try {
-                    //读取下一行的内容
-                    line = br.readLine();
-
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                continue;
-            }
-            String[] temp;
-
-            // 用“:”分割字符串并储存到temp数组
-            temp = line.split(separator);
-
-            //将读取到的内容放入键值对
-            dictionary.put(temp[0], temp[1]);
-
-            try {
-                //读取下一行的内容
-                line = br.readLine();
-
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
+    public void readDictionary() {
+        //System.out.println("Translate.readDictionary");
+        dictionaryHashMap = new HashMap<>();
+        //获取翻译字典
+        dictionaryHashMap = dictionary.getDictionary();
     }
 
     //开始翻译
-    public void startTranslate(String dictionaryPath, String filePath) {
-        //读取字典文件
-        readDictionary(dictionaryPath);
-        //
+    public void startTranslate(String filePath) {
+        //System.out.println("Translate.startTranslate");
+        //读取翻译字典
+        readDictionary();
+        //读取待翻译文件
         HashMap<String, Integer> translation = new HashMap<>();
-        String line = null;
+        String line = "", notInDictinaryStr = "";
         FileReader fr;
         BufferedReader br = null;
         try {
             fr = new FileReader(filePath);
             br = new BufferedReader(fr);
             line = br.readLine();
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "未找到待翻译文件！");
         } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         while (line != null) {
             String[] temp;
             // 用“:”分割字符串并储存到temp数组
-            temp = line.split(separator);
+            temp = line.split(SEPARATOR);
 
             //处理第一行
             if (temp.length == 1) {
@@ -90,8 +55,11 @@ public class Translate {
 
             //翻译并存入name变量
             String name = temp[0];
-            if (dictionary.get(temp[0]) != null) {
-                name = dictionary.get(temp[0]);
+            if (dictionaryHashMap.get(name) != null) {
+                name = dictionaryHashMap.get(name);
+            }
+            else {
+                notInDictinaryStr += name + ":" + "\n";
             }
 
             //count变量储存数量
@@ -111,13 +79,12 @@ public class Translate {
             } catch (IOException e) {
             }
         }
-        String translationAll = "";
-        //读取translation的内容并存入字符串变量translationAll
+        String translationStr = "";
+        //读取translation的内容并存入字符串变量translationStr
         for (String name : translation.keySet()) {
             int count = translation.get(name);
-            translationAll += name + ":" + count + "\n";
+            translationStr += name + ":" + count + "\n";
         }
-
         //给写入文件命名
         String newFile, temp[];
         temp = filePath.split("\\.");
@@ -125,7 +92,10 @@ public class Translate {
 
         //将translationAll的内容写入文件newFile
         FileWrite fileWrite = new FileWrite();
-        fileWrite.write(translationAll, newFile);
+        fileWrite.write(translationStr, newFile);
+        //将未翻译的内容notInDictinaryStr写入notInDictionary.txt文件
+        dictionary.writeNotInDictionary(notInDictinaryStr);
+        //
         JOptionPane.showMessageDialog(null, "翻译完毕,新文件路径：\n" + newFile);
     }
 }
