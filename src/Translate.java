@@ -44,13 +44,16 @@ public class Translate {
             // 用“:”分割字符串并储存到temp数组
             temp = line.split(SEPARATOR);
 
-            //处理第一行
-            if (temp.length == 1) {
+            //处理异常
+            if (temp.length != 2) {
                 try {
                     line = br.readLine();
                 } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-                continue;
+                finally {
+                    continue;
+                }
             }
 
             //翻译并存入name变量
@@ -63,8 +66,19 @@ public class Translate {
             }
 
             //count变量储存数量
-            int count = Integer.parseInt(temp[1].substring(1));
-
+            int count;
+            try {
+                count = Integer.parseInt(temp[1].substring(1));
+            } catch (NumberFormatException e) {
+                try {
+                    line = br.readLine();
+                } catch (IOException IOe) {
+                    throw new RuntimeException(e);
+                }
+                finally {
+                    continue;
+                }
+            }
             //存在同种材料
             if (translation.containsKey(name)) {
                 //同类材料数量相加
