@@ -6,6 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/testFile" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/exeOut" />
+      <excludeFolder url="file://$MODULE_DIR$/config" />
+      <excludeFolder url="file://$MODULE_DIR$/testFile" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

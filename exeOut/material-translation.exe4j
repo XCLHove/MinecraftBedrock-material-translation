@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exe4j version="9.0" transformSequenceNumber="3">
   <directoryPresets config="E:/code/java/material-translation" />
-  <application name="material-translation1.2" distributionSourceDir="E:/code/java/material-translation/exeOut" />
-  <executable name="material-translation1.2" wrapperType="embed" executableDir="." executableMode="gui" />
+  <application name="material-translation1.3" distributionSourceDir="E:/code/java/material-translation/exeOut" />
+  <executable name="material-translation1.3" wrapperType="embed" executableDir="." executableMode="gui" />
   <java mainClass="Main" vmParameters="-Dfile.encoding=UTF-8" minVersion="1.8" maxVersion="17">
     <classPath>
       <archive location="E:/code/java/material-translation/out/artifacts/material_translation_jar/material-translation.jar" failOnError="false" />

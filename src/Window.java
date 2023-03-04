@@ -8,85 +8,86 @@ import java.awt.event.WindowEvent;
 public class Window extends JFrame implements ActionListener {
     //设置窗口长宽
     final int length = 500, width = 500;
-    //文件路径
-    String filePath = "c:";
-    JTextField showFilePath;
-    JButton fileSelect, start;
-    JLabel filePathName;
-    Config config;
+    JTextField showEnglishFilePath;
+    JButton translationFileSelectButton, StartTransltingteButton;
+    JLabel translationFilePathName;
 
     //构造方法
-    public Window(String title) {
-        //调用父类构造器设置标题
-        super(title);
-        //处理关闭窗口事件
+    public Window() {
+        super("MCBE投影材料统计翻译器");
         this.addWindowListener(new WindowAdapter() {
-            //当窗口关闭时调用该处理方法
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
+        windowInit();
     }
 
-    public void init() {
+    private void windowInit() {
         //System.out.println("Window.init");
         //设置窗口长宽
         setSize(width, length);
         //设置布局
         setLayout(new FlowLayout());
         //
-        filePathName = new JLabel("翻译文件路径");
+        translationFilePathName = new JLabel("翻译文件路径");
         //路径显示文本框
-        showFilePath = new JTextField(null, 25);
+        showEnglishFilePath = new JTextField(null, 25);
         //
-        fileSelect = new JButton("选择翻译文件");
-        start = new JButton("开始翻译");
+        translationFileSelectButton = new JButton("选择翻译文件");
+        StartTransltingteButton = new JButton("开始翻译");
         //添加监听事件
-        fileSelect.addActionListener(this);
-        start.addActionListener(this);
+        translationFileSelectButton.addActionListener(this);
+        StartTransltingteButton.addActionListener(this);
         //
-        add(filePathName);
-        add(showFilePath);
-        add(fileSelect);
+        add(translationFilePathName);
+        add(showEnglishFilePath);
+        add(translationFileSelectButton);
         //
-        add(start);
+        add(StartTransltingteButton);
         //设置默认路径
-        setDefaultPath();
+        fileInit();
     }
 
-    public void setDefaultPath() {
+    private void fileInit() {
         //System.out.println("Window.setDefaultPath");
-        config = new Config();
-        //更新notInDictinary.txt文件(去重)
         Dictionary dictionary = new Dictionary();
-        dictionary.refreshNotInDictionary();
-        //获取配置文件中的路径
-        filePath = config.getFilePath();
-        //显示到文本域中
-        if (filePath != null) {
-            showFilePath.setText(filePath);
+        dictionary.refreshNotInDictionaryFile();
+        //
+        Config config = new Config();
+        String translationFilePath = config.getEnglishFilePath();
+        if (translationFilePath != null) {
+            showEnglishFilePath.setText(translationFilePath);
         }
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("选择翻译文件")) {
-            FileSelect fp = new FileSelect();
-            filePath = fp.select(filePath);
-            if (filePath != null) {
-                showFilePath.setText(filePath);
-                //刷新配置文件
-                config.setFilePath(filePath);
-            }
+        if (e.getActionCommand().equals(translationFileSelectButton.getText())) {
+            selectEnglishFile();
         }
-        if (e.getActionCommand().equals("开始翻译")) {
-            //从文本域获取路径
-            filePath = showFilePath.getText();
-            //开始翻译filePath路径的文件
-            Translate translate = new Translate();
-            translate.startTranslate(filePath);
-            ////刷新配置文件
-            config.setFilePath(filePath);
+        if (e.getActionCommand().equals(StartTransltingteButton.getText())) {
+            StartTranslate();
         }
+    }
+
+    private void selectEnglishFile() {
+        String currentDirectoryPath = showEnglishFilePath.getText();
+        String EnglishFilePath = new PathSelector(currentDirectoryPath).getFilePath();
+        //
+        showEnglishFilePath.setText(EnglishFilePath);
+        //刷新配置文件
+        Config config = new Config();
+        config.setEnglishFilePath(EnglishFilePath);
+    }
+
+    private void StartTranslate() {
+        Translation translate = new Translation();
+        String EnglishFilePath = showEnglishFilePath.getText();
+        translate.startTranslating(EnglishFilePath);
+        //刷新配置文件
+        Config config = new Config();
+        config.setEnglishFilePath(EnglishFilePath);
     }
 }
