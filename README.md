@@ -14,7 +14,7 @@
 
 translationDictionary.txt 中的格式为:
 
-**原英文名称:翻译后中文名称**
+**EnglishName:中文名称**
 
 例如：
 
