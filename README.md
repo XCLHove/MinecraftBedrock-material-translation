@@ -1,6 +1,14 @@
-# mcbe-projection-material-translation
+# MinecraftBedrock-material-translation
 
 # 我的世界基岩版投影材料翻译工具
+
+<center><img src=".\img\MinecraftBedrock.jpg" alt="MinecraftBedrock"  /></center>
+
+效果展示:
+
+<center><img src=".\img\show.png" alt="show"  /></center>
+
+---
 
 请搭配[RavinMaddHatter/Structura](https://github.com/RavinMaddHatter/Structura)使用。
 
@@ -8,16 +16,18 @@
 
 ---
 
+(最新版下载链接)[]
 如有 *翻译错误*  的请自行修改 *config* 文件夹下 *translationDictionary.txt* 的内容并提交[issue](https://github.com/XCLHove/McbeTranslate/issues)写明你修改的内容以帮助完善翻译。
 
 如有 *未翻译* 的请将 *config* 文件夹下 *notInDictinary.txt* 中的内容提交[issue](https://github.com/XCLHove/McbeTranslate/issues)。
 
 translationDictionary.txt 中的格式为:
 
-**EnglishName:中文名称**
+**`EnglishName:中文名称`**
 
 例如：
 
-**air:空气**
+**`air:空气`**
 
 ---
+

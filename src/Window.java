@@ -9,12 +9,12 @@ public class Window extends JFrame implements ActionListener {
     //设置窗口长宽
     final int length = 500, width = 500;
     JTextField showEnglishFilePath;
-    JButton translationFileSelectButton, StartTransltingteButton;
+    JButton translationFileSelectButton, StartTranslatingButton;
     JLabel translationFilePathName;
 
     //构造方法
     public Window() {
-        super("MCBE投影材料统计翻译器");
+        super("MCBE材料翻译器");
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
@@ -35,16 +35,16 @@ public class Window extends JFrame implements ActionListener {
         showEnglishFilePath = new JTextField(null, 25);
         //
         translationFileSelectButton = new JButton("选择翻译文件");
-        StartTransltingteButton = new JButton("开始翻译");
+        StartTranslatingButton = new JButton("开始翻译");
         //添加监听事件
         translationFileSelectButton.addActionListener(this);
-        StartTransltingteButton.addActionListener(this);
+        StartTranslatingButton.addActionListener(this);
         //
         add(translationFilePathName);
         add(showEnglishFilePath);
         add(translationFileSelectButton);
         //
-        add(StartTransltingteButton);
+        add(StartTranslatingButton);
         //设置默认路径
         fileInit();
     }
@@ -67,14 +67,14 @@ public class Window extends JFrame implements ActionListener {
         if (e.getActionCommand().equals(translationFileSelectButton.getText())) {
             selectEnglishFile();
         }
-        if (e.getActionCommand().equals(StartTransltingteButton.getText())) {
+        if (e.getActionCommand().equals(StartTranslatingButton.getText())) {
             StartTranslate();
         }
     }
 
     private void selectEnglishFile() {
         String currentDirectoryPath = showEnglishFilePath.getText();
-        String EnglishFilePath = new PathSelector(currentDirectoryPath).getFilePath();
+        String EnglishFilePath = new PathSelector().getFilePath(currentDirectoryPath);
         //
         showEnglishFilePath.setText(EnglishFilePath);
         //刷新配置文件
