@@ -1,6 +1,6 @@
 # MinecraftBedrock-material-translation
 
-# 我的世界基岩版投影材料翻译工具
+# 我的世界基岩版材料翻译工具
 
 <div style="text-align: center;"><img src=".\img\MinecraftBedrock.jpg" alt="MinecraftBedrock"  /></div>
 
