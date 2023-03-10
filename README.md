@@ -4,6 +4,10 @@
 
 <div style="text-align: center;"><img src=".\img\MinecraftBedrock.jpg" alt="MinecraftBedrock"  /></div>
 
+[gitee仓库地址](https://gitee.com/xclhove/minecraft-bedrock-material-translation)|[github仓库地址](https://github.com/XCLHove/MinecraftBedrock-material-translation)
+
+---
+
 效果展示:
 
 <div style="text-align: center;"><img src=".\img\show.png" alt="show"  /></div>
@@ -33,4 +37,3 @@ translationDictionary.txt 中的格式为:
 **`air:空气`**
 
 ---
-
