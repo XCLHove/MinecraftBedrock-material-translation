@@ -4,7 +4,7 @@
 
 <div style="text-align: center;"><img src=".\img\MinecraftBedrock.jpg" alt="MinecraftBedrock"  /></div>
 
-[gitee仓库地址](https://gitee.com/xclhove/minecraft-bedrock-material-translation)|[github仓库地址](https://github.com/XCLHove/MinecraftBedrock-material-translation)
+[gitee仓库地址](https://gitee.com/xclhove/MinecraftBedrock-material-translation)|[github仓库地址](https://github.com/XCLHove/MinecraftBedrock-material-translation)
 
 ---
 
